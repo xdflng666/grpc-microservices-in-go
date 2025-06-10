@@ -9,7 +9,7 @@ on:
     inputs:
       listing:
         type: string
-        description: 'Listing number (e.g. 2.1)'
+        description: 'Listing number (e.g., 2.1)'
         required: true
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
 
       # Go build cache
       - name: Go Build Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.go-cache-paths.outputs.go-build }}
           key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
@@ -45,6 +45,4 @@ jobs:
       - name: Run
         run: |
           cd "$(find . -name listing_${{ github.event.inputs.listing }})"
-          ./run.sh ${{ env.GITHUB_USERNAME }} ${{ env.GITHUB_EMAIL }} 
-          
-
+          ./run.sh ${{ env.GITHUB_USERNAME }} ${{ env.GITHUB_EMAIL }}
